@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Author, Book
+from .models import Author, Book, Review
 
 
 @admin.register(Author)
@@ -15,6 +15,6 @@ class BookAdmin(admin.ModelAdmin):
     search_fields = ('title', 'author__first_name', 'author__last_name',)
 
 
-# @admin.register(Review)
-# class BookAdmin(admin.ModelAdmin):
-#     list_display = ('book', 'rating',)
+@admin.register(Review)
+class BookAdmin(admin.ModelAdmin):          # noqa F811
+    list_display = ('book', 'rating',)
