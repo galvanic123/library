@@ -147,3 +147,9 @@ CASHES = {
         'LOCATION': 'redis://redis:6379/1',
     }
 }
+
+POSTGRES_DB = 'library_project'
+POSTGRES_USER = 'library_user'
+POSTGRES_PASSWORD = 'library_password'
+DB_HOST = 'localhost'
+DB_PORT = 5432
