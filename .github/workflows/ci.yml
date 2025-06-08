@@ -10,9 +10,9 @@ jobs:
       postgres:
         image: postgres:latest
         env:
-          DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
-          DATABASE_USER: ${{ secrets.DATABASE_USER }}
-          DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+          POSTGRES_DB: ${{ secrets.DATABASE_NAME }}
+          POSTGRES_USER: ${{ secrets.DATABASE_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
         ports:
           - 5432:5432
 
@@ -43,10 +43,18 @@ jobs:
             echo "DATABASE_USER: $DATABASE_USER"
             echo "DATABASE_PASSWORD: $DATABASE_PASSWORD"
 
-      - name: Run migrations
+      - name: Run migrate
+        env:
+          NAME: library_project
+          USER: library_user
+          PASSWORD: library_password
         run: python manage.py migrate
 
       - name: Run tests
+        env:
+          NAME: library_project
+          USER: library_user
+          PASSWORD: library_password
         run: python manage.py test
 
   deploy:
