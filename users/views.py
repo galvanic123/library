@@ -10,7 +10,6 @@ class RegisterView(FormView):
     form_class = CustomUserCreationForm
     success_url = reverse_lazy('library:books_list')
 
-
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
@@ -23,5 +22,3 @@ class RegisterView(FormView):
         from_email = 'sav4l@yandex.ru'
         recipient_list = [user_email,]
         send_mail(subject, message, from_email, recipient_list)
-
-

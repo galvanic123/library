@@ -1,4 +1,4 @@
-from .models import Book, Review
+from .models import Review
 
 
 class BookService:

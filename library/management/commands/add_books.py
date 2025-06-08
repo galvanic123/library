@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand
 from library.models import Author, Book
 
+
 class Command(BaseCommand):
     help = 'Add books to the database'
 
@@ -17,4 +18,3 @@ class Command(BaseCommand):
                 self.stdout.write(self.style.SUCCESS(f'Successfully added book: {book.title}'))
             else:
                 self.stdout.write(self.style.WARNING(f'Book already exist: {book.title}'))
-

@@ -11,6 +11,7 @@ from django.utils.decorators import method_decorator
 from django.core.cache import cache
 from .services import BookService
 
+
 class ReviewBookView(LoginRequiredMixin, View):
     def post(self, request, book_id):
         book = get_object_or_404(Book, id=book_id)
@@ -57,12 +58,14 @@ class AuthorCreateView(CreateView):
     template_name = 'library/author_form.html'
     success_url = reverse_lazy('library:authors_list')
 
+
 @method_decorator(cache_page(60 * 15), name='dispatch')
 class AuthorUpdateView(UpdateView):
     model = Author
     form_class = AuthorForm
     template_name = 'library/author_form.html'
     success_url = reverse_lazy('library:authors_list')
+
 
 @method_decorator(cache_page(60 * 15), name='dispatch')
 class BooksListView(LoginRequiredMixin, ListView):
@@ -76,12 +79,11 @@ class BooksListView(LoginRequiredMixin, ListView):
         return queryset.filter(publication_date__year__gt=1800)
 
 
-
 class BookCreateView(LoginRequiredMixin, CreateView):
     model = Book
     fields = ['title', 'publication_date', 'author']
     template_name = 'library/book_form.html'
-    success_url =reverse_lazy('library:books_list')
+    success_url = reverse_lazy('library:books_list')
     permission_required = 'library.add_book'
 
 
@@ -103,7 +105,6 @@ class BookDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-
 class BookUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Book
     form_class = BookForm
@@ -111,7 +112,6 @@ class BookUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     template_name = 'library/book_form.html'
     success_url = reverse_lazy('library:books_list')
     permission_required = 'library.change_book'
-
 
 
 class BookDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):

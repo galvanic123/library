@@ -2,6 +2,7 @@ from django.test import TestCase
 
 from .models import Author, Book
 
+
 class ModelTest(TestCase):
     def setUp(self):
         self.author = Author.objects.create(
@@ -15,6 +16,7 @@ class ModelTest(TestCase):
             publication_date='1833-01-01',
             author=self.author,
         )
+
     def test_author_str(self):
         """Тест строкового представления автора"""
         self.assertEqual(str(self.author), 'Александр Пушкин')

@@ -2,6 +2,7 @@ from django import forms
 from .models import Author, Book
 from django.core.exceptions import ValidationError
 
+
 class BookForm(forms.ModelForm):
     class Meta:
         model = Book
@@ -13,6 +14,7 @@ class BookForm(forms.ModelForm):
         self.fields['publication_date'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Введите дату публикации'})
         self.fields['author'].widget.attrs.update({'class': 'form-control'})
 
+
 class AuthorForm(forms.ModelForm):
     class Meta:
         model = Author
@@ -23,6 +25,7 @@ class AuthorForm(forms.ModelForm):
         self.fields['first_name'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Введите имя'})
         self.fields['last_name'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Введите фамилию'})
         self.fields['birth_date'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Введите дату рождения'})
+
     def clean(self):
         cleaned_data = super().clean()
         first_name = cleaned_data.get('first_name')
@@ -31,6 +34,3 @@ class AuthorForm(forms.ModelForm):
         if Author.objects.filter(first_name=first_name, last_name=last_name).exists():
             raise ValidationError('Автор с таким именем и фамилией уже существует')
         return cleaned_data
-
-
-
