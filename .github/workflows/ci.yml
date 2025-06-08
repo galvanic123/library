@@ -5,6 +5,10 @@ on: [push, pull_request]
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+      DATABASE_USER: ${{ secrets.DATABASE_USER }}
+      DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
 
     steps:
       - name: Check out code
