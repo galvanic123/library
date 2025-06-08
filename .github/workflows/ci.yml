@@ -27,6 +27,12 @@ jobs:
             python -m pip install --upgrade pip
             pip install -r requirements.txt
 
+      - name: Echo environment variables
+        run: |
+            echo "DATABASE_NAME: $DATABASE_NAME"
+            echo "DATABASE_USER: $DATABASE_USER"
+            echo "DATABASE_PASSWORD: $DATABASE_PASSWORD"
+
       - name: Run migrations
         run: python manage.py migrate
 
